@@ -16,4 +16,14 @@ func main() {
 		return x * y
 	}(6, 5)
 	fmt.Println(i2)
+
+	f2 := ReturnFunc()
+	f2() //I'm a function
+}
+
+// 関数を返す関数（コールバック関数やないかい）
+func ReturnFunc() func() {
+	return func() {
+		fmt.Println("I'm a function")
+	}
 }
