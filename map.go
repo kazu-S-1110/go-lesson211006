@@ -44,4 +44,17 @@ func main() {
 	// 要素の削除方法
 	delete(m4, 1) //第一引数にmap, 第二引数にキーを指定
 	fmt.Println(m4)
+
+	// for文
+	for k, v := range m3 {
+		fmt.Println(k, v)
+	}
+	// valueだけパターン
+	for _, v := range m3 {
+		fmt.Println(v)
+	}
+	// keyだけパターン
+	for k := range m3 {
+		fmt.Println(k)
+	}
 }
