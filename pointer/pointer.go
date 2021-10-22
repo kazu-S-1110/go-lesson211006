@@ -10,6 +10,11 @@ func Double(i int) {
 func Doublev2(i *int) { //参照渡しと呼ばれる手法
 	*i = *i * 2
 }
+func Doublev3(s []int) {
+	for i, v := range s {
+		s[i] = v * 10
+	}
+}
 
 func main() {
 	var n int = 100
@@ -43,4 +48,9 @@ func main() {
 	fmt.Println(n)  //20000
 	fmt.Println(*p) //20000
 
+	// スライスにおいては参照型なのでポインタを意識する必要はない
+	var sl []int = []int{1, 2, 3, 4, 5}
+
+	Doublev3(sl)
+	fmt.Println(sl) //[10 20 30 40 50]
 }
