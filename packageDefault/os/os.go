@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"os"
 )
 
@@ -43,9 +45,28 @@ func main() {
 	// defer f.Close()
 
 	// ファイル操作Create
-	f, _ := os.Create("hoge.txt") //createは新規作成するメソッド、既に存在する場合削除してもう一度作成する
-	f.Write([]byte("Hello\n"))
-	f.WriteAt([]byte("Golang\n"), 6) //6文字offsetしたところから書き込む
-	f.Seek(0, os.SEEK_END)           //末尾に移動するメソッド
-	f.WriteString("Yeah!")
+	// f, _ := os.Create("hoge.txt") //createは新規作成するメソッド、既に存在する場合削除してもう一度作成する
+	// f.Write([]byte("Hello\n"))
+	// f.WriteAt([]byte("Golang\n"), 6) //6文字offsetしたところから書き込む
+	// f.Seek(0, os.SEEK_END)           //末尾に移動するメソッド
+	// f.WriteString("Yeah!")
+
+	// ファイル操作Read
+	f, err := os.Open("hoge.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer f.Close()
+
+	bs := make([]byte, 128) //第二引数はlength長さを指定
+	n, err := f.Read(bs)    //スライスを渡してそこに格納している
+	fmt.Println(n)          //nには書き込んだバイト数が入っている
+	fmt.Println(string(bs))
+
+	// readatを使うと移動した位置から読み取る
+	bs2 := make([]byte, 128)
+	nn, err := f.ReadAt(bs2, 10)
+	fmt.Println(nn)
+	fmt.Println(string(bs2))
+
 }
