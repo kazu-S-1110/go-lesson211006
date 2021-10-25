@@ -77,6 +77,7 @@ func main() {
 	// O_CREATE ファイルがなければ作成
 	// O_TRUNC 可能であればファイルの内容をオープン時に空にする
 	f, err := os.OpenFile("hoge.txt", os.O_RDWR|os.O_CREATE, 0666) //第二引数にはパイプでつなげることが可能（読み書きで開く、なければCreateする）
+	// 第三引数はファイルを新規作成する際のパーミッションの値を入れる。開くとか書き込む際は意味がないお話、多分。
 	if err != nil {
 		log.Fatalln(err)
 	}
