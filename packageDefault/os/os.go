@@ -52,21 +52,40 @@ func main() {
 	// f.WriteString("Yeah!")
 
 	// ファイル操作Read
-	f, err := os.Open("hoge.txt")
+	// f, err := os.Open("hoge.txt")
+	// if err != nil {
+	// 	log.Fatalln(err)
+	// }
+	// defer f.Close()
+
+	// bs := make([]byte, 128) //第二引数はlength長さを指定
+	// n, err := f.Read(bs)    //スライスを渡してそこに格納している
+	// fmt.Println(n)          //nには書き込んだバイト数が入っている
+	// fmt.Println(string(bs))
+
+	// // readatを使うと移動した位置から読み取る
+	// bs2 := make([]byte, 128)
+	// nn, err := f.ReadAt(bs2, 10)
+	// fmt.Println(nn)
+	// fmt.Println(string(bs2))
+
+	// ファイル操作OpenFile
+	// O_RDONLY 読み取り専用
+	// O_WRONLY 書き込み専用
+	// O_RDWR 読み書き可能
+	// O_APPEND ファイル末尾に追記
+	// O_CREATE ファイルがなければ作成
+	// O_TRUNC 可能であればファイルの内容をオープン時に空にする
+	f, err := os.OpenFile("hoge.txt", os.O_RDWR|os.O_CREATE, 0666) //第二引数にはパイプでつなげることが可能（読み書きで開く、なければCreateする）
 	if err != nil {
 		log.Fatalln(err)
 	}
 	defer f.Close()
 
-	bs := make([]byte, 128) //第二引数はlength長さを指定
-	n, err := f.Read(bs)    //スライスを渡してそこに格納している
-	fmt.Println(n)          //nには書き込んだバイト数が入っている
+	bs := make([]byte, 128)
+	n, err := f.Read(bs)
+	fmt.Println(n)
 	fmt.Println(string(bs))
-
-	// readatを使うと移動した位置から読み取る
-	bs2 := make([]byte, 128)
-	nn, err := f.ReadAt(bs2, 10)
-	fmt.Println(nn)
-	fmt.Println(string(bs2))
-
+	f.Seek(0, os.SEEK_END)
+	f.WriteString("okkkkkk")
 }
