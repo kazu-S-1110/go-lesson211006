@@ -10,6 +10,6 @@ func TestAverage(t *testing.T) {
 	}
 	v := Average([]int{1, 2, 3, 4, 5})
 	if v != 3 {
-		t.Error("%v != %v", v, 3)
+		t.Errorf("%v != %v", v, 3)
 	}
 }
