@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // fmt
 
@@ -26,4 +29,21 @@ func main() {
 	// ポインタ(pointer)	%p}
 	fmt.Printf("%s\n", "hello")  //hello
 	fmt.Printf("%#v\n", "Hello") //"Hello"
+
+	// sprint系 出力ではなくフォーマットした結果を文字列で返す。変数に代入する時などで使う
+	s := fmt.Sprint("Hello")
+	s1 := fmt.Sprintf("%v\n", "Hello")
+	s2 := fmt.Sprintln("Hello")
+
+	fmt.Println(s)
+	fmt.Println(s1)
+	fmt.Println(s2)
+
+	// Fprint系　書き込み先を指定
+	fmt.Fprint(os.Stdout, "Hello") //os.stdoutはコマンドラインのこと
+
+	f, _ := os.Create("test.txt")
+	defer f.Close()
+
+	fmt.Fprintln(f, "this is written by fprint")
 }
