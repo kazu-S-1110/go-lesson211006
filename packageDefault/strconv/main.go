@@ -50,4 +50,13 @@ func main() {
 	bf6, _ := strconv.ParseBool("False")
 	fmt.Println(bf2, bf3, bf4, bf5, bf6) //false false false false false
 
+	// 文字列を整数型に変換する
+	i3, _ := strconv.ParseInt("12345", 10, 0)
+	fmt.Printf("%v, %T\n", i3, i3) //12345, int64
+	i4, _ := strconv.ParseInt("-1", 10, 0)
+	fmt.Printf("%v, %T\n", i4, i4) //12345, int64
+
+	// 簡易的に変換できる
+	i10, _ := strconv.Atoi("123")
+	fmt.Println(i10)
 }
