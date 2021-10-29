@@ -2,3 +2,5 @@ packageDefault/os/test.txt
 packageDefault/os/hoge.txt
 packageDefault/fmt/test.txt
 packageDefault/log/test.log
+packageDefault/ioutil/foo.txt
+packageDefault/ioutil/bar.txt
