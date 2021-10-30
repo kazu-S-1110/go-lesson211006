@@ -74,4 +74,25 @@ func main() {
 	fmt.Println("a", re6.MatchString("a"))                       //true
 	fmt.Println("aaabaaabbbbb", re6.MatchString("aaabaaabbbbb")) //true
 	fmt.Println("b", re6.MatchString("b"))                       //false
+
+	// 正規表現の文字クラス
+	re7 := regexp.MustCompile(`[XYZ]`)
+	fmt.Println("Y", re7.MatchString("Y"))
+	fmt.Println("AB", re7.MatchString("AB"))
+	fmt.Println("YZ", re7.MatchString("YZ"))
+
+	re8 := regexp.MustCompile(`^[0-9A-Za-z_]{4}$`)
+	fmt.Println("ABC", re8.MatchString("ABC"))
+	fmt.Println("aABC", re8.MatchString("aABC"))
+	fmt.Println("あ", re8.MatchString("あ"))
+
+	re9 := regexp.MustCompile("[^0-9A-Za-z_]") //[]括弧内先頭に^をつけるとそれ以外を指定する
+	fmt.Println("ABC", re9.MatchString("ABC")) //false
+	fmt.Println("(')", re9.MatchString("(')")) //true
+
+	re10 := regexp.MustCompile(`(abc|ABC)(xyz|XYZ)`)
+	fmt.Println(re10.MatchString("abcxyz"))
+	fmt.Println(re10.MatchString("ABCxyz"))
+	fmt.Println(re10.MatchString("abcXYZ"))
+	fmt.Println(re10.MatchString("ABCABC"))
 }
