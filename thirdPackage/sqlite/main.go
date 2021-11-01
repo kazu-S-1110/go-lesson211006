@@ -40,17 +40,37 @@ func main() {
 	// }
 
 	// get data specific
-	cmd := "SELECT * FROM persons where age = ?"
-	//QueryRow get 1record
-	row := Db.QueryRow(cmd, 32)
-	var p Person
-	err := row.Scan(&p.Name, &p.Age)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Println("No row")
-		} else {
+	// cmd := "SELECT * FROM persons where age = ?"
+	// //QueryRow get 1record
+	// row := Db.QueryRow(cmd, 32)
+	// var p Person
+	// err := row.Scan(&p.Name, &p.Age)
+	// if err != nil {
+	// 	if err == sql.ErrNoRows {
+	// 		log.Println("No row")
+	// 	} else {
+	// 		log.Println(err)
+	// 	}
+	// }
+	// fmt.Println(p.Name, p.Age)
+
+	// get dates
+	cmd := "SELECT * FROM persons"
+	// Query は条件に合うものを全て取得
+	rows, _ := Db.Query(cmd)
+	defer rows.Close()
+	var pp []Person
+	for rows.Next() {
+		var p Person
+		err := rows.Scan(&p.Name, &p.Age)
+		if err != nil {
 			log.Println(err)
 		}
+		fmt.Println(p)
+		pp = append(pp, p)
 	}
-	fmt.Println(p.Name, p.Age)
+
+	for _, p := range pp {
+		fmt.Println(p.Name, p.Age)
+	}
 }
