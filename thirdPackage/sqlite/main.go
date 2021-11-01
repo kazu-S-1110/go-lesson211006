@@ -22,9 +22,13 @@ func main() {
 	// 	`
 
 	// add data
-	cmd := "INSERT INTO persons (name, age) VALUES (?, ?)" //?とすると後で入れてくれる
+	// cmd := "INSERT INTO persons (name, age) VALUES (?, ?)" //?とすると後で入れられるようになる
+	// _, err := Db.Exec(cmd, "hoge", 20)
+	// またSQLインジェクション対策にもなるらしい
 
-	_, err := Db.Exec(cmd, "hoge", 20)
+	// update data
+	cmd := "UPDATE persons SET age = ? WHERE name = ?"
+	_, err := Db.Exec(cmd, 32, "hoge")
 	if err != nil {
 		log.Fatalln(err)
 	}
