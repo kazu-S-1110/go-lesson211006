@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -55,22 +54,29 @@ func main() {
 	// fmt.Println(p.Name, p.Age)
 
 	// get dates
-	cmd := "SELECT * FROM persons"
-	// Query は条件に合うものを全て取得
-	rows, _ := Db.Query(cmd)
-	defer rows.Close()
-	var pp []Person
-	for rows.Next() {
-		var p Person
-		err := rows.Scan(&p.Name, &p.Age)
-		if err != nil {
-			log.Println(err)
-		}
-		fmt.Println(p)
-		pp = append(pp, p)
-	}
+	// cmd := "SELECT * FROM persons"
+	// // Query は条件に合うものを全て取得
+	// rows, _ := Db.Query(cmd)
+	// defer rows.Close()
+	// var pp []Person
+	// for rows.Next() { //ちょといつもと違う書き方なので注意
+	// 	var p Person
+	// 	err := rows.Scan(&p.Name, &p.Age)
+	// 	if err != nil {
+	// 		log.Println(err)
+	// 	}
+	// 	fmt.Println(p)
+	// 	pp = append(pp, p)
+	// }
 
-	for _, p := range pp {
-		fmt.Println(p.Name, p.Age)
+	// for _, p := range pp {
+	// 	fmt.Println(p.Name, p.Age)
+	// }
+
+	// delete data
+	cmd := "DELETE FROM persons WHERE name = ?"
+	_, err := Db.Exec(cmd, "hoge")
+	if err != nil {
+		log.Fatalln(err)
 	}
 }
